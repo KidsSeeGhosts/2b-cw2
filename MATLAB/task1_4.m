@@ -3,20 +3,8 @@
 function task1_4(EVecs)
 % Input:
 %  Evecs : the same format as in comp_pca.m
-
-%need to do montage with 'DisplayRange',[0.5,0.5]
-evecsBaseName = 'EvecsPlot';
-  for i = 1:10 %first ten PCA
-        %find i in Y
-        set(gca, 'Visible', 'off');
-        colormap 'gray';
-        imageFileName=[evecsBaseName,num2str(i),'.png'];
-        saveas(imagesc(reshape(EVecs(:,i)*255.0, 28, 28)',[-0.5 0.5]), imageFileName);
-        
+    images = zeros(28,28,10);
+  for i = 1:10 
+    images(:,:,i) = reshape(EVecs(:,i), 28, 28)';
   end
-%saveas(plot(EVecs(:,1)),'EVecsPlot1.png');
-evecsImages = {'EVecsPlot1.png', 'EVecsPlot2.png', 'EVecsPlot3.png', 'EVecsPlot4.png', 'EVecsPlot5.png', 'EVecsPlot6.png', 'EVecsPlot7.png', 'EVecsPlot8.png', 'EVecsPlot9.png', 'EVecsPlot10.png'};
-saveas(montage(evecsImages),'task1_4_imgs.pdf');
-for i = 1:10
-    delete([evecsBaseName,num2str(i),'.png'])
-end
+  saveas(montage(images, 'DisplayRange',[-0.2 0.2],'Thumbnailsize', [112 112]),'task1_4_imgs.pdf');

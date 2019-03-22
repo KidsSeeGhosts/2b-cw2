@@ -14,7 +14,6 @@ function [EVecs, EVals, CumVar, MinDims] = task1_3(X)
 %X = bsxfun(@minus, X, x_mean); %mean shift original matrix
 %covar_m = 1/(N-1) * (X' * X); % Compute covariance matrix of X
 [EVecs, EVals] = comp_pca(X); %finding eigenvectors and eigenvalues, eigenvalues are the variances
-%a = EVals; %This might need to be var(covar_m),var(X) but not sure if there's a difference. Might not even need a might just need EVals
 CumVar = cumsum(EVals);%used to be cumsum(a)
 plot(CumVar);
 totalVar = CumVar(length(CumVar)); %last element of CumVar
@@ -27,7 +26,4 @@ for i = 1:4
         end
     end
 end
-%think i'm meant to find the index of cumVar that has 70% of totalVar
-
-
 end
